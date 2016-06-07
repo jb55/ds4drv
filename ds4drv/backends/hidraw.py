@@ -63,10 +63,8 @@ class HidrawDS4Device(DS4Device):
         return fcntl.ioctl(self.fd, op, bytes(buf))
 
     def write_report(self, report_id, data):
-        if self.type == "bluetooth":
-            # TODO: Add a check for a kernel that supports writing
-            # output reports when such a kernel has been released.
-            return
+        # TODO: Add a check for a kernel that supports writing
+        # output reports when such a kernel has been released.
 
         hid = bytearray((report_id,))
         self.fd.write(hid + data)
