@@ -71,6 +71,10 @@ class HidrawDS4Device(DS4Device):
 
     def close(self):
         try:
+            # Reset LED to original hidraw pairing colour.
+            # Note: I have no idea what that is.
+            self.set_led(1, 1, 1)
+
             self.fd.close()
             self.input_device.ungrab()
         except IOError:
