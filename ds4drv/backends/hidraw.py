@@ -63,17 +63,13 @@ class HidrawDS4Device(DS4Device):
         return fcntl.ioctl(self.fd, op, bytes(buf))
 
     def write_report(self, report_id, data):
-        # TODO: Add a check for a kernel that supports writing
-        # output reports when such a kernel has been released.
-
         hid = bytearray((report_id,))
         self.fd.write(hid + data)
 
     def close(self):
         try:
             # Reset LED to original hidraw pairing colour.
-            # Note: I have no idea what that is.
-            self.set_led(1, 1, 1)
+            self.set_led(0, 0, 1)
 
             self.fd.close()
             self.input_device.ungrab()
